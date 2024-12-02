@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+
+  <title>Pałowanie</title>
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+  <link rel="stylesheet" href="css/theme3.css">
+  
+  <style>
+  #layout1 {
+	  background-image: url(assets/layout.jpg);
+  }
+     a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
+   }
+  </style>
+
+</head>
+<body>
+  <div id="layout1">
+
+
+  <header>
+  </header>
+
+
+  <main>
+	<div class="page-section">
+		<div class="container">
+			<div class="btn-group" style="width:100%">
+				
+			  <button onclick="showOptions()" style="width:29%">Wybierz zakres</button>
+			  <button onclick="showOptions2()" style="width:29%">Auto-wyświetlanie</button>
+			  <button onclick="showOptions3()" style="width:29%">Blok 3x3 powtarzanie</button>
+			  <a href="karty.html" class="karty" style="width:6%">KARTY</a>
+			  <a href="index.html" class="liczby" style="width:7%;background-color:#366799">LICZBY</a>
+			</div>
+		</div>
+		<div class="container">
+			<div id="Options">
+				
+					<input type="text" id="lrange" name="zakresl" placeholder="Liczba kolumn (np: 3)">
+					<input type="text" id="rrange" name="zakresr" placeholder="Liczba wierszy (np: 3)">
+					<button onclick="rangeFunction()" class="submit-button" type="submit" id="submitButton">Potwierdź</button>
+				 
+			</div>
+
+			<div id="Options2">
+					<input type="text2" id="interwał" name="interwał" placeholder="Interwał (np: 1000 -> 1 sekunda)">
+					<button onclick="autoPlay()" class="submit-button" type="submit" id="submitButton2">Potwierdź</button>
+				 
+			</div>
+			
+			<div id="Options3">
+					<input type="text" id="powtarzanie" name="powtarzanie" placeholder="Powtarzanie cyfr (dla 3x3)">
+					<button onclick="powtarzanieFunction()" class="submit-button" type="submit" id="submitButton">Potwierdź</button>
+			</div>
+
+			<div class="center-position">
+				<div id="displayNumber"></div>
+			</div>
+			<div class="small_break4"></div>
+			<div class="button-right" onclick="displayFunction()"></div>
+			<div class="small_break2"></div>
+		</div>
+		<div class="container">
+		<button onclick="showHelp()" class="help-button">Pomoc</button>
+			<div id="Pomoc">
+				<div class="field">
+				  <div class="pole">Wciskaj strzałkę w prawo, aby pałować losowe liczby</div>
+				  <div class="pole">Będąc w trybie losowych liczb, wciśnij r aby dodać liczbę do puli</div>
+				  <div class="pole">Wciskaj strzałkę w górę, aby pałować cyfry z utworzonej puli</div>
+				  <div class="pole">Wciśnij przycisk 'p' aby przerwać auto-wyświetlanie</div>
+				</div>
+			</div>
+		</div>
+		<div class="small_break2"></div>
+	</div>
+  </main>
+  <footer>
+  </footer>
+<script src="binarne.js"></script>
+</div>
+</body>
+</html>

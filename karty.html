@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+
+  <title>Pałowanie</title>
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+  <link rel="stylesheet" href="css/theme2.css">
+  
+  <style>
+  #layout1 {
+	  background-image: url(assets/layout.jpg);
+  }
+     a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
+   }
+  </style>
+
+</head>
+<body>
+  <div id="layout1">
+
+
+  <header>
+  </header>
+
+
+  <main>
+	<div class="page-section">
+		<div class="container">
+			<div class="btn-group" style="width:100%">
+			  <button onclick="showOptions()" style="width:22%">Wybierz ilość kart</button>
+			  <button onclick="showOptions2()" style="width:22%">Auto-wyświetlanie</button>
+			  <button onclick="showOptions3()" style="width:22%">Sposób wyświetlania</button>
+			  <button onclick="showOptions4()" style="width:22%">Dodatkowe opcje</button>
+			  <a href="index.html" class="liczby" style="width:6%">LICZBY</a>
+			  <a href="binarne.html" class="liczby" style="width:6%;background-color:#e67d00">BINARNE</a>
+			</div>
+		</div>
+		<div class="container">
+		
+				<div id="Options">
+					
+						<input type="text" id="cards" name="cards" placeholder="Ilość wyświetlanych kart (2, 3 lub 4)">
+						<button onclick="rangeFunction()" class="submit-button2" type="submit" id="submitButton">Potwierdź</button>
+					 
+				</div>
+			
+				<div id="Options2">
+						<input type="text2" id="interwał" name="interwał" placeholder="Interwał (np: 1000 -> 1 sekunda)">
+						<button onclick="autoPlay()" class="submit-button2" type="submit" id="submitButton2">Potwierdź</button>
+					 
+				</div>
+		
+				<div id="Options3">
+					<button class="submit-button3" type="submit" id="submitButton3">SZEROKO</button>
+					<h1></h1>
+				</div>
+		
+			
+				<div id="Options4">
+					<button class="submit-button3" type="submit" id="submitButton4">Opcja Eweliny</button>
+					<h1></h1>
+				</div>
+			
+		</div>
+		<div class="container">
+		<div class="small_break3"></div>
+			<div class="row justify-content-center no-gutters">
+					<img src="blank.jpg" name="canvas" id="card1" alt="" class="obrazek1" style="box-shadow: 0 0 0em;">
+			
+					<img  src="blank.jpg" name="canvas2" id="card2" alt="" class="obrazek2" style="box-shadow: 0 0 0em;">
+			
+					<img  src="blank.jpg" name="canvas3" id="card3" alt="" class="obrazek3" style="box-shadow: 0 0 0em;">
+			
+					<img  src="blank.jpg" name="canvas4" id="card4" alt="" class="obrazek4" style="box-shadow: 0 0 0em;">
+			
+			</div>
+		</div>
+		<div class="small_break"></div>
+		<div class="button-right" onclick="rangeFunction()"></div>
+		<div class="small_break2"></div>
+		<div class="small_break4"></div>
+		<div class="container">
+		<button onclick="showHelp()" class="help-button2">Pomoc</button>
+			<div id="Pomoc">
+				<div class="field">
+				  <div class="pole2">Wciskaj strzałkę w prawo, aby pałować losowe karty</div>
+				  <div class="pole2">Nie ma opcji na wyświetlenie innej liczby kart niż 2, 3 lub 4</div>
+				  <div class="pole2">Pula nie działa, dosyć trudne to jest, ale chyba mało przydatne</div>
+				  <div class="pole2">Wciśnij przycisk 'p' aby przerwać auto-wyświetlanie</div>
+				</div>
+			</div>
+		</div>
+	<div class="small_break2"></div>
+	</div>
+  </main>
+  <footer>
+  </footer>
+<script src="cards.js"></script>
+</div>
+</body>
+</html>
