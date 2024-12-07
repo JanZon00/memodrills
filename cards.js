@@ -1,3 +1,9 @@
+window.onload = function() {
+    if (localStorage.getItem('access_granted') !== 'true') {
+      window.location.href = "index.html";
+    }
+}
+
 function preloadImages(imageArray) {
     imageArray.forEach(src => {
         const img = new Image();
@@ -15,15 +21,6 @@ function showOnClick() {
     document.getElementById("displayNumber").innerHTML = y;
   }
 }	
-function showHelp() {
-  var x = document.getElementById("Pomoc");
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.display = "block";
-  }
-}
-
 
 function showOptions() {
   var x = document.getElementById("Options");
@@ -53,6 +50,39 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+let btn = document.getElementById('submitButton3');
+let index = 0;
+
+const texts = ['Narrow', 'Wide'];
+
+btn.addEventListener('click', () => {
+    index = index >= texts.length - 1 ? 0 : index + 1;
+    btn.innerText = texts[index];
+    changeBorder();
+});
+
+let waskie = false;
+
+function changeBorder() {
+    let card1 = document.getElementById('card1');
+    let card2 = document.getElementById('card2');
+    let card3 = document.getElementById('card3');
+    let card4 = document.getElementById('card4');
+
+    if (!waskie) {
+        card1.style.marginLeft = "74px";
+        card2.style.marginLeft = "25px";
+        card3.style.marginRight = "25px";
+        card4.style.marginRight = "74px";
+    } else {
+        card1.style.marginLeft = "120px";
+        card2.style.marginLeft = "40px";
+        card3.style.marginRight = "40px";
+        card4.style.marginRight = "120px";
+    }
+    waskie = !waskie;
+}
+
 
 let num;
 var x;
@@ -61,106 +91,74 @@ const numbers = new Set();
 
 var imagesArray = ["deck/1.png", "deck/2.png", "deck/3.png", "deck/4.png", "deck/5.png", "deck/6.png", "deck/7.png", "deck/8.png", "deck/9.png", "deck/10.png", "deck/11.png", "deck/12.png", "deck/13.png", "deck/14.png", "deck/15.png", "deck/16.png", "deck/17.png", "deck/18.png", "deck/19.png", "deck/20.png", "deck/21.png", "deck/22.png", "deck/23.png", "deck/24.png", "deck/25.png", "deck/26.png", "deck/27.png", "deck/28.png", "deck/29.png", "deck/30.png", "deck/31.png", "deck/32.png", "deck/33.png", "deck/34.png", "deck/35.png", "deck/36.png", "deck/37.png", "deck/38.png", "deck/39.png", "deck/40.png", "deck/41.png", "deck/42.png", "deck/43.png", "deck/44.png", "deck/45.png", "deck/46.png", "deck/47.png", "deck/48.png", "deck/49.png", "deck/50.png", "deck/51.png", "deck/52.png"];
 
-function rangeFunction(){
-	preloadImages(imagesArray);
-	var a = document.getElementById("cards").value;
-	console.log(a);
-	let opcjaEweliny = document.getElementById("submitButton4");
-	let txt = opcjaEweliny.textContent || opcjaEweliny.innerText;
-	if(a == 2 && txt == "Opcja Eweliny"){
-		var karta2;
-		var karta3;
-		
-		karta2 = Math.floor(Math.random() * 52);
-		karta3 = karta2;
-		
-		while(karta3 == karta2){
-			karta3 = Math.floor(Math.random() * 52);
-		}
-		if(karta2 != karta3){
-			document.canvas2.src = imagesArray[karta2];
-			document.canvas3.src = imagesArray[karta3];
-			document.canvas.src = src="blank.jpg";
-			document.canvas4.src = src="blank.jpg";
-		}
-	}
-	else if(a == 2 && txt == "Normalnie"){
-		var karta2;
-		var karta3;
-		
-		karta2 = Math.floor(Math.random() * 52);
-		karta3 = karta2;
-		
-		while(karta3 == karta2){
-			karta3 = getRandomInt(40, 51);
-		}
-		if(karta2 != karta3){
-			var s = getRandomInt(0, 3);
-			if(s == 1){
-			document.canvas2.src = imagesArray[karta2];
-			document.canvas3.src = imagesArray[karta3];
-			document.canvas.src = src="blank.jpg";
-			document.canvas4.src = src="blank.jpg";
-			}
-			else{
-			document.canvas2.src = imagesArray[karta3];
-			document.canvas3.src = imagesArray[karta2];
-			document.canvas.src = src="blank.jpg";
-			document.canvas4.src = src="blank.jpg";
-			}
-		}
-	}
-	else if(a == 3){
-		var karta1;
-		var karta2;
-		var karta3;
-		
-		karta1 = Math.floor(Math.random() * 52);
-		karta2 = karta1;
-		karta3 = karta1;
-		
-		while(karta2 == karta1){
-			karta2 = Math.floor(Math.random() * 52);
-		}
-		
-		
-		while(karta3 == karta1 || karta3 == karta2){
-			karta3 = Math.floor(Math.random() * 52);
-		}
-		if(karta2 != karta1 && karta3 != karta1 && karta3 != karta2){
-			document.canvas.src = imagesArray[karta1];
-			document.canvas2.src = imagesArray[karta2];
-			document.canvas3.src = imagesArray[karta3];
-		}
-	}
-	else{
-		var karta1;
-		var karta2;
-		var karta3;
-		var karta4;
-		
-		karta1 = Math.floor(Math.random() * 52);
-		karta2 = karta1;
-		karta3 = karta1;
-		karta4 = karta1;
-		
-		while(karta2 == karta1){
-			karta2 = Math.floor(Math.random() * 52);
-		}	
-		while(karta3 == karta1 || karta3 == karta2){
-			karta3 = Math.floor(Math.random() * 52);
-		}
-		while(karta4 == karta1 || karta4 == karta2 || karta4 == karta3){
-			karta4 = Math.floor(Math.random() * 52);
-		}
-		if(karta2 != karta1 && karta3 != karta1 && karta3 != karta2 && karta4 != karta1 && karta4 != karta2 && karta4 != karta3){
-			document.canvas.src = imagesArray[karta1];
-			document.canvas2.src = imagesArray[karta2];
-			document.canvas3.src = imagesArray[karta3];
-			document.canvas4.src = imagesArray[karta4];
-		}
-	}
+let btn2 = document.getElementById('submitButton4');
+let index2 = 0;
+
+const texts2 = ["Normal", "Ewelina's option"];
+
+btn2.addEventListener('click', () => {
+    index2 = index2 >= texts2.length - 1 ? 0 : index2 + 1;
+    btn2.innerText = texts2[index2];
+    rangeFunction();
+});
+
+function rangeFunction() {
+    preloadImages(imagesArray);
+    var a = parseInt(document.getElementById("cards").value); // Pobieramy liczbę kart jako liczbę całkowitą
+    console.log(a);
+
+    let opcjaEweliny = document.getElementById("submitButton4").innerText;
+
+    let cards = [
+        document.getElementById("card1"),
+        document.getElementById("card2"),
+        document.getElementById("card3"),
+        document.getElementById("card4")
+    ];
+    cards.forEach(card => {
+        card.style.visibility = "hidden";
+        card.src = "blank.jpg";
+    });
+    if (isNaN(a) || a < 1 || a > 4) {
+        console.error("Invalid number of cards specified:", a);
+        a = 4;
+    }
+
+    let usedIndices = new Set();
+    let drawnFromHighRange = false;
+
+    for (let i = 0; i < a; i++) {
+        let cardIndex;
+
+        if (opcjaEweliny === "Ewelina's option" && a === 2) {
+            if (i === a - 1 && !drawnFromHighRange) {
+                do {
+                    cardIndex = Math.floor(Math.random() * (52 - 40)) + 40;
+                } while (usedIndices.has(cardIndex));
+                drawnFromHighRange = true;
+            } else {
+                let range = Math.random() < 0.5 ? [40, 52] : [0, 52];
+                let min = range[0];
+                let max = range[1];
+                do {
+                    cardIndex = Math.floor(Math.random() * (max - min)) + min;
+                } while (usedIndices.has(cardIndex));
+                if (cardIndex >= 40) {
+                    drawnFromHighRange = true;
+                }
+            }
+        } else {
+            do {
+                cardIndex = Math.floor(Math.random() * 52);
+            } while (usedIndices.has(cardIndex));
+        }
+
+        usedIndices.add(cardIndex);
+        cards[i].style.visibility = "visible";
+        cards[i].src = imagesArray[cardIndex];
+    }
 }
+
 
 window.addEventListener("keydown", checkKeyPress, false);
 
@@ -170,37 +168,6 @@ function checkKeyPress(key) {
  }
 }
 window.addEventListener("keydown", checkKeyPressRight, false);
-
-function checkKeyPressRight(key) {
-	if (key.keyCode == "38") {
-		rangeFunction2();
-	}
-}
-
-function getRandomItem(set) {
-    let items = Array.from(set);
-    return items[Math.floor(Math.random() * items.length)];
-}
-
-function rangeFunction2() {	
- if(numbers.size === 0){
-	
- }
- else{
-  var r = getRandomItem(numbers);
-  if(r < 100 && r >= 10){
-	num = "0" + r;
-	document.getElementById("displayNumber").innerHTML = num;
-  }
-  else if(r < 10 && r >= 0){
-	num = "00" + r;
-	document.getElementById("displayNumber").innerHTML = num;
-  }
-  else{
-	document.getElementById("displayNumber").innerHTML = r;
-  }
- }
-}
 
 function autoPlay() {
 	var v = document.getElementById("interwał").value;
@@ -237,44 +204,3 @@ function showOptions4() {
     x.style.visibility = "visible";
   }
 }
-
-let waskie = 0;
-function changeBorder() {
-  if(waskie == 0){
-  document.getElementById('card1').style.marginLeft = "74px";
-  document.getElementById('card2').style.marginLeft = "25px";
-  document.getElementById('card3').style.marginRight = "25px";
-  document.getElementById('card4').style.marginRight = "74px";
-  waskie = 1;
-  }
-  else{
-  document.getElementById('card1').style.marginLeft = "120px";
-  document.getElementById('card2').style.marginLeft = "40px";
-  document.getElementById('card3').style.marginRight = "40px";
-  document.getElementById('card4').style.marginRight = "120px";
-  waskie = 0;
-  }
-}
-
-let btn = document.getElementById('submitButton3');
-let message = document.querySelector('h1');
-let index = 0;
-
-const texts = ['WĄSKO', 'SZEROKO'];
-
-btn.addEventListener('click', () =>{
-	btn.innerText = texts[index];
-  index = index >= texts.length - 1 ? 0 : index + 1;
-  changeBorder();
-});
-
-let btn2 = document.getElementById('submitButton4');
-let index2 = 0;
-
-const texts2 = ['Normalnie', 'Opcja Eweliny'];
-
-btn2.addEventListener('click', () =>{
-	btn2.innerText = texts2[index2];
-  index2 = index2 >= texts2.length - 1 ? 0 : index2 + 1;
-  rangeFunction();
-});

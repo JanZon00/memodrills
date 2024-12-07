@@ -8,11 +8,9 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 header {
 	font-family: 'mongolian-baiti-regular', serif;
 }
-
 .page-section {
   position: relative;
   display: block;
@@ -21,7 +19,6 @@ header {
   margin-right: auto;
   min-height: 90vh;
 }
-
 #layout1 {
     background-image: url(../assets/layout.jpg);
 }
@@ -31,7 +28,6 @@ header {
 	justify-content: center;
 	margin: auto;
 }
-
 #displayNumber {
   width: 200px;
   height: 85px;
@@ -41,13 +37,11 @@ header {
   padding: 15px 0;
   border-radius: 10px;
 }
-
 h1{
   color: white;
   font-size: 30px;
   font-weight: 600;
 }
-
 .btn-group button {
   background-color: #e67d00;
   color: white;
@@ -58,52 +52,38 @@ h1{
 @media screen and (max-width: 800px){
     .btn-group{ font-size:1.8vw; }
 }
-
 .btn-group:after {
   content: "";
   clear: both;
   display: table;
 }
-
-
 .btn-group button:hover {
   background-color: #d55300;
 }
-/*drop down box*/
-
-
 #Options {
   float: left;
-  width: 29%;
+  width: 34%;
   height: 150px;
   text-align: center;
   visibility:  hidden;
 }
 #Options2 {
   float: left;
-  width: 29%;
+  width: 33%;
   height: 150px;
   text-align: center;
   visibility:  hidden;
 }
-
 #Options3 {
   float: left;
-  width: 29%;
+  width: 33%;
   height: 150px;
   text-align: center;
   visibility:  hidden;
 }
-
-#Pomoc {
-  position: absolute;
-  display: none;
-}
-
 @media screen and (max-width: 800px){
     input::placeholder{ font-size:3vw; }
 }
-/*################*/
 input[type=text], select {
   width: 100%;
   padding: 12px 20px;
@@ -122,7 +102,6 @@ input[type=text2], select {
   border-radius: 4px;
   box-sizing: border-box;
 }
-
 .submit-button{
   width: 100%;
   background-color: #e67d00;
@@ -136,45 +115,8 @@ input[type=text2], select {
 @media screen and (max-width: 800px){
     .submit-button{ font-size:2.2vw; }
 }
-
 input[type=submit]:hover {
   background-color: #364e79;
-}
-/*#########################*/
-.field{
-	max-width: 100%;
-	text-align: center;
-	float: left;
-	transition: 0.3s;
-	display: flex;
-}
-
-.pole{
-	position: relative;
-	bottom: 140px;
-	background-color: #e67d00;
-	border-bottom-color: black;
-	color: white;
-	height: 100px;
-	max-width: 250px;
-	z-index: 1;
-	margin-right: 5px;
-	padding-top: 20px;
-}
-@media screen and (max-width: 800px){
-    .pole{ font-size:2.1vw; }
-}
-@media screen and (max-width: 600px){
-    .pole{ font-size:2.3vw; }
-}
-.help-button{
-  width: 70px;
-  background-color: #e67d00;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-  position: relative;
-  margin-top: 20px; 
 }
 .small_break{
 	padding-top: 300px;
@@ -198,51 +140,18 @@ input[type=submit]:hover {
 	max-height: 205px;
 	width: auto;
 }
-.karty{
-	background-color: #CF1300;
-	text-align: center;
-	padding-top: 12px;
-	color: white;
-}
-.liczby{
-	background-color: #366799;
-	text-align: center;
-	padding-top: 12px;
-	color: white;
-}
-.obrazek1{
-	position: absolute;
-	max-height: 205px;
-	width: auto;
-	margin-left: 120px;
-	z-index: 4;
-    border-radius: 8px;
-}
-.obrazek2{
-	position: absolute;
-	max-height: 205px;
-	width: auto;
-	margin-left: 40px;
-	z-index: 3;
-    border-radius: 8px;
-}
-.obrazek3{
-	position: absolute;
-	max-height: 205px;
-	width: auto;
-	margin-right: 40px;
-	z-index: 2;
-    border-radius: 8px;
-}
-.obrazek4{
-	position: absolute;
-	max-height: 205px;
-	width: auto;
-	margin-right: 120px;
-	z-index: 1;
-    border-radius: 8px;
+.karty {
+  background-color: #CF1300;
+  text-align: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  color: white;
+  text-decoration: none;
 }
 
+.karty:hover {
+  color: white;
+}
 .button-right {
   display: none; 
   position: relative;
@@ -254,7 +163,6 @@ input[type=submit]:hover {
   border-radius: 50%;
   transition: all 0.2s linear;
 }
-
 .button-right::after {
   content: "";
   position: absolute;
@@ -268,7 +176,6 @@ input[type=submit]:hover {
   transform: rotate(45deg);
   left: 10px;
 }
-
 @media (max-width: 500px) {
   .button-right {
     display: block;
@@ -279,7 +186,6 @@ input[type=submit]:hover {
   position: relative;
   display: inline-block;
 }
-
 #ExtraOption {
   position: absolute;
   top: 100%;

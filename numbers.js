@@ -1,3 +1,9 @@
+window.onload = function() {
+    if (localStorage.getItem('access_granted') !== 'true') {
+      window.location.href = "index.html";
+    }
+}
+
 let isBlack = true;
 
 function toggleColor() {
@@ -16,7 +22,7 @@ function toggleText() {
   const button = document.getElementById('colorButton');
   
   if (isBlack) {
-	button.innerHTML = 'Bez powtarzania';
+	button.innerHTML = 'No repetitions';
   } else {
 	button.innerHTML = queue.length;
   }
@@ -105,6 +111,7 @@ function rangeFunction() {
 	}
 	queue = mixArr(queue);
   }
+  displayFunction();
 }
 
 function rangeFunction2(){
@@ -193,26 +200,3 @@ function showOptions2() {
     x.style.visibility = "visible";
   }
 }
-
-
-/*var lettersArray = [171, 235, 236, 245, 273, 312, 316, 314, 312, 341, 351, 359, 360, 362, 368, 389, 410, 412, 413, 415, 419, 428, 440, 456, 458, 461, 462, 463, 464, 465, 466, 467, 471, 477, 492, 493, 502, 506, 508, 511, 518, 519, 520, 529, 530, 551, 568, 592, 593, 602, 603, 609, 612, 618, 620, 624, 628, 629, 630, 631, 635, 639, 640, 646, 645, 651, 652, 678, 679, 684, 693, 697, 705, 708, 709, 714, 723, 724, 733, 741, 752, 753, 758, 767, 768, 769, 772, 773, 778, 792, 793, 795, 796, 813, 829, 832, 840, 841, 842, 843, 849, 853, 860, 867, 869, 873, 874, 882, 892, 893, 897, 894, 911, 914, 958, 959, 961, 962, 967, 968, 971, 973, 974, 978, 979, 982, 983, 985, 987, 989, 990, 992, 448, 449, 473, 481, 514, 515, 517, 521, 531, 578, 579, 590, 594, 595, 596, 599, 600, 641, 642, 660, 662, 669, 670, 692, 706, 713, 800, 801, 802, 806, 807, 828, 865, 895, 917, 921, 937, 938, 939, 940];
-
-function displayFunction() {	
-  var a = document.getElementById("lrange").value;
-  console.log(a);
-  var b = document.getElementById("rrange").value;
-  console.log(b);
-
-  var c = getRandomInt(0, 171);
-  x = document.getElementById("displayNumber");
-  x.style.cssText  = "font-size:44px;color:white;"
-  x = lettersArray[c];
-  window.addEventListener("keydown", checkKeyPressR, false);
-  function checkKeyPressR(key) {  
-	  if (key.keyCode == "82") {
-		  numbers.add(x);
-	  }
-  }
-  
-  document.getElementById("displayNumber").innerHTML = x;
-}*/

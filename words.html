@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+  <title>MEMO DRILLS</title>
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="css/theme4.css">
+
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
+  
+  <style>
+    #layout1 {
+      background-image: url(assets/layout.jpg);
+    }
+
+    a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
+    }
+
+      #word {
+    font-size: 40px;
+    text-align: center;
+    color: #444444;
+    margin: 0 auto;
+    display: block;
+    width: max-content;
+  }
+
+  @media (max-width: 768px) {
+    #word {
+      font-size: 35px;
+    }
+
+    #next-button {
+      font-size: 25px;
+      width: 140px;
+      height: 50px;
+    }
+
+    #delete-button, #custom-upload-button {
+      font-size: 16px;
+    }
+
+    select {
+      font-size: 16px;
+      padding: 8px;
+    }
+
+    input[type="file"] {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #word {
+      font-size: 25px; /* Jeszcze mniejszy rozmiar czcionki na bardzo małych ekranach */
+    }
+
+    #next-button {
+      font-size: 20px;
+      width: 120px;
+      height: 45px;
+    }
+
+    select {
+      font-size: 14px;
+    }
+
+    #delete-button, #custom-upload-button {
+      font-size: 14px;
+    }
+  }
+
+    #button-container {
+	  margin-top: 30px;
+	  width: 100%;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	}
+
+    #next-button {
+      font-size: 35px;
+      width: 160px;
+      height: 60px;
+      background-color: #228B22;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    #upload-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    select {
+      font-size: 18px;
+      padding: 10px;
+    }
+
+    input[type="file"] {
+      margin-top: 20px;
+    }
+
+    #delete-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 30px;
+		width: 200px;
+		margin-left: auto;
+		margin-right: auto;
+	  }
+
+    #delete-button {
+      font-size: 18px;
+      background-color: #CF1300;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+
+  #custom-upload-button {
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #555555;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+  }
+
+  #custom-upload-button:hover {
+    background-color: #444444;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="layout1">
+    <header></header>
+
+    <main>
+      <div class="page-section">
+        <div class="container">
+          <div class="btn-group" style="width:100%">
+            <a href="index.html" class="karty" style="width:25%;background-color:#000000">Home</a>
+            <a href="numbers.html" class="karty" style="width:25%;background-color:#366799">Numbers</a>
+            <a href="cards.html" class="karty" style="width:25%">Cards</a>
+            <a href="binary.html" class="karty" style="width:25%;background-color:#e67d00">Binary</a>
+          </div>
+        </div>
+		<div class="container">
+			<div class="btn-group" style="width:100%">
+				<button onclick="showOptions()" style="width:33%">Set groups</button>
+				<button onclick="" style="width:33%"></button>
+				<button id="colorButton" onclick="toggleNoRepetitions()" style="width:34%">No repetitions</button>
+			</div>
+		</div>
+		<div class="container">
+			<div id="Options" style="visibility: hidden;">
+				<input type="text" id="lrange" name="groups" placeholder="Groups (default: 1)">
+				<button onclick="applyGroupNumber()" class="submit-button" type="submit" id="submitButton">Apply</button>
+			</div>
+			<div id="Options2" style="visibility: hidden;">
+				<input type="text" id="interval" name="interval" placeholder="Milliseconds (e.g., 1000 for 1 sec)">
+				<button onclick="startAutoPlay()" class="submit-button" type="submit" id="submitButton2">Start</button>
+			</div>
+		</div>
+
+        <div class="small_break4"></div>
+        <div class="small_break4"></div>
+		
+        <div id="word"></div>
+
+        <div id="button-container">
+          <button id="next-button">Next</button>
+        </div>
+		<div class="small_break4"></div>
+        <div id="upload-container">
+		  <label for="file-input" id="custom-upload-button">Upload word list (.txt)</label>
+		  <input type="file" id="file-input" style="display: none;">
+		</div>
+
+        <div id="list-select-container" style="text-align: center; margin: 30px auto; width: 60%;">
+          <select id="list-select">
+            <option value="" disabled selected>Choose a list...</option>
+          </select>
+        </div>
+        <div id="delete-container">
+          <label for="delete-input">Enter list name to delete:</label>
+          <input type="text" id="delete-input" placeholder="List name to delete">
+          <button id="delete-button">Delete list</button>
+        </div>
+		<div class="small_break4"></div>
+		<div class="small_break2"></div>
+      </div>
+    </main>
+    <footer></footer>
+
+	<script src="words2.js"></script>
+    <script type="module" src="words.js"></script>
+  </div>
+</body>
+</html>

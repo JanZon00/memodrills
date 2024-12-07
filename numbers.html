@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+
+  <title>MEMO DRILLS</title>
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+  <link rel="stylesheet" href="css/theme.css">
+  
+  <style>
+  #layout1 {
+	  background-image: url(assets/layout.jpg);
+  }
+     a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
+   }
+  </style>
+
+</head>
+<body>
+  <div id="layout1">
+
+
+  <header>
+  </header>
+
+
+  <main>
+	<div class="page-section">
+		<div class="container">
+			<div class="btn-group" style="width:100%">
+			  <a href="index.html" class="karty" style="width:25%;background-color:#000000">Home</a>
+			  <a href="cards.html" class="karty" style="width:25%">Cards</a>
+			  <a href="binary.html" class="karty" style="width:25%;background-color:#e67d00">Binary</a>
+			  <a href="words.html" class="karty" style="width:25%;background-color:#228B22">Words</a>
+			</div>
+		</div>
+		<div class="container">
+			<div class="btn-group" style="width:100%">
+			  <button onclick="showOptions()" style="width:33%">Set range</button>
+			  <button onclick="showOptions2()" style="width:33%">Auto advance</button>
+			  <button id="colorButton" onclick="rangeFunction2(), toggleColor(), toggleText()" style="width:34%">No repetitions</button>
+			</div>
+		</div>
+		<div class="container">
+			<div id="Options">
+				
+					<input type="text" id="lrange" name="zakresl" placeholder="Start range (e.g., 0)">
+					<input type="text" id="rrange" name="zakresr" placeholder="End range (e.g., 999)">
+					<button onclick="rangeFunction()" class="submit-button" type="submit" id="submitButton">Apply</button>
+				 
+			</div>
+
+			<div id="Options2">
+					<input type="text2" id="interwał" name="interwał" placeholder="milliseconds (e.g., 1000 for 1 sec)">
+					<button onclick="autoPlay()" class="submit-button" type="submit" id="submitButton2">Start</button>
+				 
+			</div>
+
+			<div class="center-position">
+				<div id="displayNumber"></div>
+			</div>
+			<div class="small_break4"></div>
+			<div class="button-right" onclick="displayFunction()"></div>
+			<div class="small_break2"></div>
+		</div>
+		<div class="small_break2"></div>
+	</div>
+  </main>
+  <footer>
+  </footer>
+<script src="numbers.js"></script>
+</div>
+</body>
+</html>

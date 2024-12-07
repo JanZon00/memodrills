@@ -3,89 +3,294 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <meta name="copyright" content="MACode ID, https://macodeid.com/">
-
-  <title>Pałowanie</title>
+  <title>MEMO DRILLS</title>
 
   <link rel="stylesheet" href="css/bootstrap.css">
-  
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-
   <link rel="stylesheet" href="css/theme.css">
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+    import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+
+    // Firebase configuration
+	const firebaseConfig = {
+	  apiKey: "AIzaSyB9wR_77owFbGaxJVOudW_X383uLnQGKYg",
+	  authDomain: "memodrills-key.firebaseapp.com",
+	  databaseURL: "https://memodrills-key-default-rtdb.europe-west1.firebasedatabase.app",
+	  projectId: "memodrills-key",
+	  storageBucket: "memodrills-key.firebasestorage.app",
+	  messagingSenderId: "724844117124",
+	  appId: "1:724844117124:web:4c08890cab090cb85b96d1"
+	};
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Function to check the access key from Firebase
+    function checkAccessKey(userKey) {
+      const keyRef = ref(db, 'accessKeys/' + userKey);
+
+      get(keyRef)
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log("Key is valid");
+            localStorage.setItem('access_granted', 'true');
+            document.getElementById('accessForm').style.display = 'none'; // Hide the form
+            document.getElementById('mainContent').style.display = 'block'; // Show the main content
+          } else {
+            console.log("Key is invalid");
+            alert("Incorrect key. Please try again.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error checking key:", error);
+        });
+    }
+
+    window.onload = function() {
+      if (localStorage.getItem('access_granted') === 'true') {
+        document.getElementById('accessForm').style.display = 'none'; // Hide the form if access granted
+        document.getElementById('mainContent').style.display = 'block'; // Show the content
+      } else {
+        document.getElementById('accessForm').style.display = 'block'; // Show the form
+        document.getElementById('mainContent').style.display = 'none'; // Hide the content
+      }
+    }
+
+    // Function to handle form submission
+    function checkAccess() {
+      const userKey = document.getElementById("accessKey").value;
+      checkAccessKey(userKey); // Call the Firebase function
+    }
+	
+	document.getElementById("accessForm").querySelector("button").addEventListener("click", function() {
+      const userKey = document.getElementById("accessKey").value;
+      checkAccessKey(userKey); // Call the Firebase function
+    });
+  </script>
+  <script>
+  function toggleDescription(id) {
+      const desc = document.getElementById(id);
+      desc.style.display = desc.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
   
   <style>
-  #layout1 {
-	  background-image: url(assets/layout.jpg);
-  }
-     a, a:hover, a:focus, a:active {
-      text-decoration: none;
-      color: inherit;
-   }
-  </style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+    }
 
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #333;
+      padding: 10px 0;
+      z-index: 1000;
+    }
+
+    header a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    header a:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+
+    header .numbers {
+      background-color: #366799;
+    }
+
+    header .cards {
+      background-color: #CF1300;
+    }
+
+    header .binary {
+      background-color: #e67d00;
+    }
+	
+	header .words {
+      background-color: #228B22;
+    }
+
+    header a:hover {
+      text-decoration: none;
+      color: white;
+    }
+
+    main {
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .welcome {
+      margin: 20px 0;
+      font-size: 32px;
+      color: #333;
+    }
+
+    .instructions {
+      margin: 10px 0 30px 0;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .competition-button {
+      width: 200px;
+      padding: 10px 20px;
+      background-color: #366799;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .competition-button:hover {
+      background-color: #274a66;
+    }
+
+    .description {
+      display: none;
+      margin: 10px 0;
+      width: 90%;
+      text-align: left;
+      font-size: 14px;
+      color: #555;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+	    .form-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 100px;
+    }
+
+    .form-container input {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form-container button {
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #366799;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .form-container button:hover {
+      background-color: #274a66;
+    }
+  </style>
 </head>
 <body>
-  <div id="layout1">
-
-
+  <div id="accessForm" class="form-container">
+    <h2>Enter Access Key</h2>
+    <input type="password" id="accessKey" placeholder="Enter the key">
+    <button onclick="checkAccess()">Submit</button>
+  </div>
+  
   <header>
+    <a href="numbers.html" class="numbers">Numbers</a>
+    <a href="cards.html" class="cards">Cards</a>
+    <a href="binary.html" class="binary">Binary</a>
+	<a href="words.html" class="words">Words</a>
   </header>
 
-
   <main>
-	<div class="page-section">
-		<div class="container">
-			<div class="btn-group" style="width:100%">
-				
-			  <button onclick="showOptions()" style="width:29%">Wybierz zakres</button>
-			  <button onclick="showOptions2()" style="width:29%">Auto-wyświetlanie</button>
-			  <button id="colorButton" onclick="rangeFunction2(), toggleColor(), toggleText()" style="width:29%">Bez powtarzania</button>
-			  <a href="karty.html" class="karty" style="width:6%">KARTY</a>
-			  <a href="binarne.html" class="karty" style="width:7%;background-color:#e67d00">BINARNE</a>
-			</div>
-		</div>
-		<div class="container">
-			<div id="Options">
-				
-					<input type="text" id="lrange" name="zakresl" placeholder="Zakres lewy (np: 1)">
-					<input type="text" id="rrange" name="zakresr" placeholder="Zakres Prawy (np: 999)">
-					<button onclick="rangeFunction()" class="submit-button" type="submit" id="submitButton">Potwierdź</button>
-				 
-			</div>
+    <div class="welcome">Welcome to the Memo Drills App</div>
+    <div class="instructions">
+      Click on one of the buttons at the top of the screen to start training a specific discipline, 
+      or click on one of the buttons below to learn more about the available options.
+    </div>
+<div class="button-container">
+  <button class="competition-button" onclick="toggleDescription('desc-numbers')">Numbers</button>
+  <div id="desc-numbers" class="description">
+    The Numbers mode displays random sequences of digits. Available options include:
+    <ul>
+      <li><strong>Set Range:</strong> Enter the start range (e.g., 0) and end range (e.g., 999), then click Apply to confirm your selection.</li>
+      <li>You can navigate through the digits by clicking the right arrow or pressing the button on your screen if you're using a mobile device.</li>
+      <li><strong>Auto Advance:</strong> Enter a time in milliseconds, confirm your selection, and the numbers will be displayed within the specified time interval. Click the 'p' button to pause the automatic display.</li>
+      <li><strong>No Repetitions:</strong> Enabling this option ensures that numbers within the selected range will be shown without repetitions.</li>
+    </ul>
+  </div>
 
-			<div id="Options2">
-					<input type="text2" id="interwał" name="interwał" placeholder="Interwał (np: 1000 -> 1 sekunda)">
-					<button onclick="autoPlay()" class="submit-button" type="submit" id="submitButton2">Potwierdź</button>
-				 
-			</div>
+  <button class="competition-button" onclick="toggleDescription('desc-cards')">Cards</button>
+  <div id="desc-cards" class="description">
+    The Cards mode displays random sequences of cards. Available options include:
+    <ul>
+      <li><strong>Select Number of Cards:</strong> Enter the number of cards to display, then click Apply to confirm your selection.</li>
+      <li>You can navigate through the cards by clicking the right arrow or pressing the button on your screen if you're using a mobile device.</li>
+      <li><strong>Auto Advance:</strong> Enter a time in milliseconds, confirm your selection, and the cards will be displayed within the specified time interval.</li>
+      <li><strong>Display Mode:</strong> Choose between wide or narrow card display modes.</li>
+      <li><strong>Additional Settings:</strong> Extra options requested by users. Ewelina’s option displays card combinations where at least one card is a J, Q, or K.</li>
+    </ul>
+  </div>
 
-			<div class="center-position">
-				<div id="displayNumber"></div>
-			</div>
-			<div class="small_break4"></div>
-			<div class="button-right" onclick="displayFunction()"></div>
-			<div class="small_break2"></div>
-		</div>
-		<div class="container">
-		<button onclick="showHelp()" class="help-button">Pomoc</button>
-			<div id="Pomoc">
-				<div class="field">
-				  <div class="pole">Wciskaj strzałkę w prawo, aby pałować losowe liczby</div>
-				  <div class="pole">Będąc w trybie losowych liczb, wciśnij r aby dodać liczbę do puli</div>
-				  <div class="pole">Wciskaj strzałkę w górę, aby pałować cyfry z utworzonej puli</div>
-				  <div class="pole">Wciśnij przycisk 'p' aby przerwać auto-wyświetlanie</div>
-				</div>
-			</div>
-		</div>
-		<div class="small_break2"></div>
-	</div>
-  </main>
-  <footer>
-  </footer>
-<script src="numbers.js"></script>
+  <button class="competition-button" onclick="toggleDescription('desc-binary')">Binary</button>
+  <div id="desc-binary" class="description">
+    The Binary mode displays random sequences of binary digits. Available options include:
+    <ul>
+      <li><strong>Select Grid Dimensions:</strong> Enter the number of columns and rows to display, then click Apply to confirm your selection. There is also an option to add space every X digits, allowing you to choose the interval between digits for larger gaps.</li>
+      <li>You can navigate through the binary digits by clicking the right arrow or pressing the button on your screen if you're using a mobile device.</li>
+      <li><strong>Auto Advance:</strong> Enter a time in milliseconds, confirm your selection, and the binary digits will be displayed within the specified time interval. Click the 'p' button to pause the automatic display.</li>
+      <li><strong>3x3 Box Repeat:</strong> An additional option available only for 3x3 grids. This allows you to enter a number that determines which digit combinations will repeat.</li>
+    </ul>
+  </div>
+  
+  <button class="competition-button" onclick="toggleDescription('desc-words')">Words</button>
+  <div id="desc-words" class="description">
+    The Words mode displays random sequences of words. Available options include:
+    <ul>
+      <li><strong>Set Groups:</strong> Enter the number of words to display, then click Apply to confirm your selection.</li>
+      <li>You can navigate through the words by clicking the right arrow or pressing the button on your screen.</li>
+      <li><strong>No Repetitions:</strong> Enables the display of a list of words without repetitions.</li>
+      <li><strong>Upload Word List:</strong> Allows you to upload your own list of words. Click 'Choose a list...' to open a dropdown of available word lists. If you upload your own list, it will be added to this list.</li>
+      <li><strong>Delete List:</strong> Allows you to delete an unwanted word list. Please note that any user can delete your list, so caution is advised when using this option.</li>
+    </ul>
+  </div>
 </div>
+  </main>
 </body>
 </html>

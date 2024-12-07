@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+
+  <title>MEMO DRILLS</title>
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+  <link rel="stylesheet" href="css/theme2.css">
+  
+  <style>
+  #layout1 {
+	  background-image: url(assets/layout.jpg);
+  }
+     a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
+   }
+  </style>
+
+</head>
+<body>
+  <div id="layout1">
+
+
+  <header>
+  </header>
+
+
+  <main>
+	<div class="page-section">
+		<div class="container">
+			<div class="btn-group" style="width:100%">
+			  <a href="index.html" class="karty" style="width:25%;background-color:#000000">Home</a>
+			  <a href="numbers.html" class="karty" style="width:25%;background-color:#366799">Numbers</a>
+			  <a href="binary.html" class="karty" style="width:25%;background-color:#e67d00">Binary</a>
+			  <a href="words.html" class="karty" style="width:25%;background-color:#228B22">Words</a>
+			</div>
+		</div>
+		<div class="container">
+			<div class="btn-group" style="width:100%">
+			  <button onclick="showOptions()" style="width:25%">Select number of cards</button>
+			  <button onclick="showOptions2()" style="width:25%">Auto advance</button>
+			  <button onclick="showOptions3()" style="width:25%">Display mode</button>
+			  <button onclick="showOptions4()" style="width:25%">Additional settings</button>
+			</div>
+		</div>
+		<div class="container">
+		
+				<div id="Options">
+					
+						<input type="text" id="cards" name="cards" placeholder="Number of cards (2, 3, or 4)">
+						<button onclick="rangeFunction()" class="submit-button2" type="submit" id="submitButton">Apply</button>
+					 
+				</div>
+			
+				<div id="Options2">
+						<input type="text2" id="interwał" name="interwał" placeholder="milliseconds (e.g., 1000 for 1 sec)">
+						<button onclick="autoPlay()" class="submit-button2" type="submit" id="submitButton2">Start</button>
+					 
+				</div>
+		
+				<div id="Options3">
+					<button class="submit-button3" type="submit" id="submitButton3">Wide</button>
+					<h1></h1>
+				</div>
+		
+			
+				<div id="Options4">
+					<button class="submit-button3" type="submit" id="submitButton4">Ewelina's option</button>
+					<h1></h1>
+				</div>
+			
+		</div>
+		<div class="container">
+		<div class="small_break3"></div>
+			<div class="row justify-content-center no-gutters">
+					<img src="blank.jpg" name="canvas" id="card1" alt="" class="obrazek1" style="box-shadow: 0 0 0em;">
+			
+					<img  src="blank.jpg" name="canvas2" id="card2" alt="" class="obrazek2" style="box-shadow: 0 0 0em;">
+			
+					<img  src="blank.jpg" name="canvas3" id="card3" alt="" class="obrazek3" style="box-shadow: 0 0 0em;">
+			
+					<img  src="blank.jpg" name="canvas4" id="card4" alt="" class="obrazek4" style="box-shadow: 0 0 0em;">
+			
+			</div>
+		</div>
+		<div class="small_break"></div>
+		<div class="button-right" onclick="rangeFunction()"></div>
+		<div class="small_break2"></div>
+		<div class="small_break4"></div>
+	<div class="small_break2"></div>
+	</div>
+  </main>
+  <footer>
+  </footer>
+<script src="cards.js"></script>
+</div>
+</body>
+</html>

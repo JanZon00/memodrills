@@ -1,3 +1,9 @@
+window.onload = function() {
+    if (localStorage.getItem('access_granted') !== 'true') {
+      window.location.href = "index.html";
+    }
+}
+
 let isBlack = true;
 let repeatDigit = null; 
 
@@ -8,7 +14,7 @@ function powtarzanieFunction() {
     repeatDigit = null;
     return;
   }
-  displayFunction(); // Wyświetl wyniki natychmiast po wprowadzeniu wartości
+  displayFunction();
 }
 
 function toggleColor() {
@@ -72,8 +78,12 @@ function rangeFunction() {
   a = parseInt(document.getElementById("lrange").value) || 0;
   b = parseInt(document.getElementById("rrange").value) || 0;
 
-  // Ogranicz rrange do wartości maksymalnie 3
   b = b > 3 ? 3 : b;
+  
+  const biggerSpaceInput = document.getElementById("biggerSpace");
+  if (!biggerSpaceInput.value) {
+    biggerSpaceInput.value = a;
+  }
 
   if (norepeat) {
     queue = mixArr(Array.from({ length: b - a + 1 }, (_, i) => i + a));
@@ -88,10 +98,11 @@ function rangeFunction2() {
 
 function displayFunction() {
   const display = document.getElementById("displayNumber");
+  const biggerSpaceValue = parseInt(document.getElementById("biggerSpace").value) || 1;
   let binaryBlocks = '';
 
   for (let i = 0; i < b; i++) {
-    let binaryBlock;
+    let binaryBlock = '';
 
     if (i === 0 && repeatDigit !== null && a === 3 && b === 3) {
       binaryBlock = repeatDigit.toString(2).padStart(a, '0');
@@ -99,11 +110,18 @@ function displayFunction() {
       binaryBlock = getRandomBinary(a);
     }
 
-    binaryBlocks += `<div style="display:inline-block;width:30px;text-align:center;margin-right:5px;">${binaryBlock.split('').join('</div><div style="display:inline-block;width:30px;text-align:center;margin-right:5px;">')}</div><br>`;
+    let rowWithSpacing = '';
+    for (let j = 0; j < binaryBlock.length; j++) {
+      rowWithSpacing += `<div style="display:inline-block;width:20px;text-align:center;margin-right:5px;">${binaryBlock[j]}</div>`;
+      if ((j + 1) % biggerSpaceValue === 0) {
+        rowWithSpacing += `<div style="display:inline-block;width:8px;"></div>`;
+      }
+    }
+    binaryBlocks += `<div style="display:inline-block;width:100%;margin-bottom:5px;">${rowWithSpacing}</div>`;
   }
 
   if (norepeat) toggleText();
-  display.style.cssText = "font-size:40px;color:white;overflow:auto;margin: 0 auto;line-height: 1.2;";
+  display.style.cssText = "font-size:40px;color:white;overflow:auto;margin: 0 auto;line-height: 1.1;";
   if (window.innerWidth > 768) {
     display.style.width = "30%";
   } else {
@@ -115,7 +133,6 @@ function displayFunction() {
   updateDisplayHeight(b);
 }
 
-
 function updateDisplayHeight(rrange) {
   const display = document.getElementById("displayNumber");
   if (rrange === 1) {
@@ -123,7 +140,7 @@ function updateDisplayHeight(rrange) {
   } else if (rrange === 2) {
     display.style.height = "128px";
   } else if (rrange === 3) {
-    display.style.height = "176px";
+    display.style.height = "180px";
   }
 }
 
