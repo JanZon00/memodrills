@@ -82,15 +82,15 @@ function startAutoPlay() {
         alert("Please enter a valid interval in milliseconds.");
         return;
     }
-    stopAutoPlay(); // Upewniamy się, że stary interwał zostanie zatrzymany
+    stopAutoPlay();
     autoPlayInterval = setInterval(function() {
-        displayRandomWord(); // Wywołanie funkcji displayRandomWord
+        displayRandomWord();
     }, interval);
     alert(`Auto advance started with interval: ${interval} ms`);
 }
 
 function stopAutoPlay() {
-    clearInterval(autoPlayInterval); // Zatrzymujemy poprzedni interwał
+    clearInterval(autoPlayInterval);
 }
 
 function displayRandomWord() {
@@ -119,7 +119,7 @@ function displayRandomWord() {
         displayedWords.add(word);
     }
 
-    wordElement.innerText = wordsToDisplay.join(", ");
+    wordElement.innerHTML = wordsToDisplay.map(word => `<div>${word}</div>`).join("");
 }
 
 document.getElementById('next-button').addEventListener('click', handleNextButtonClick);

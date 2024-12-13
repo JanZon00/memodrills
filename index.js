@@ -19,9 +19,9 @@ const db = getDatabase(app);
 function checkAccess() {
   const userKey = document.getElementById("accessKey").value;
   if (userKey === correctKey) {
-	localStorage.setItem('access_granted', 'true'); // Zapisz dostęp
-	document.getElementById('accessForm').style.display = 'none'; // Ukryj formularz
-	document.getElementById('mainContent').style.display = 'block'; // Pokaż zawartość
+	localStorage.setItem('access_granted', 'true');
+	document.getElementById('accessForm').style.display = 'none';
+	document.getElementById('mainContent').style.display = 'block';
   } else {
 	alert("Incorrect key. Please try again.");
   }
@@ -61,10 +61,10 @@ function checkAccessKey(userKey) {
 
 window.onload = function() {
   if (localStorage.getItem('access_granted') === 'true') {
-	document.getElementById('accessForm').style.display = 'none'; // Ukryj formularz
-	document.getElementById('mainContent').style.display = 'block'; // Pokaż zawartość
+	document.getElementById('accessForm').style.display = 'none';
+	document.getElementById('mainContent').style.display = 'block';
   } else {
-	document.getElementById('accessForm').style.display = 'block'; // Wyświetl formularz
-	document.getElementById('mainContent').style.display = 'none'; // Ukryj zawartość
+	document.getElementById('accessForm').style.display = 'block';
+	document.getElementById('mainContent').style.display = 'none';
   }
 }

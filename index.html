@@ -25,11 +25,9 @@
 	  appId: "1:724844117124:web:4c08890cab090cb85b96d1"
 	};
 
-    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // Function to check the access key from Firebase
     function checkAccessKey(userKey) {
       const keyRef = ref(db, 'accessKeys/' + userKey);
 
@@ -38,8 +36,8 @@
           if (snapshot.exists()) {
             console.log("Key is valid");
             localStorage.setItem('access_granted', 'true');
-            document.getElementById('accessForm').style.display = 'none'; // Hide the form
-            document.getElementById('mainContent').style.display = 'block'; // Show the main content
+            document.getElementById('accessForm').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
           } else {
             console.log("Key is invalid");
             alert("Incorrect key. Please try again.");
@@ -52,23 +50,22 @@
 
     window.onload = function() {
       if (localStorage.getItem('access_granted') === 'true') {
-        document.getElementById('accessForm').style.display = 'none'; // Hide the form if access granted
-        document.getElementById('mainContent').style.display = 'block'; // Show the content
+        document.getElementById('accessForm').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
       } else {
-        document.getElementById('accessForm').style.display = 'block'; // Show the form
-        document.getElementById('mainContent').style.display = 'none'; // Hide the content
+        document.getElementById('accessForm').style.display = 'block';
+        document.getElementById('mainContent').style.display = 'none';
       }
     }
 
-    // Function to handle form submission
     function checkAccess() {
       const userKey = document.getElementById("accessKey").value;
-      checkAccessKey(userKey); // Call the Firebase function
+      checkAccessKey(userKey);
     }
 	
 	document.getElementById("accessForm").querySelector("button").addEventListener("click", function() {
       const userKey = document.getElementById("accessKey").value;
-      checkAccessKey(userKey); // Call the Firebase function
+      checkAccessKey(userKey);
     });
   </script>
   <script>
@@ -106,7 +103,7 @@
       text-decoration: none;
       color: white;
       font-size: 18px;
-      padding: 10px 20px;
+      padding: 10px 15px;
       border-radius: 5px;
       transition: transform 0.2s, opacity 0.2s;
     }
