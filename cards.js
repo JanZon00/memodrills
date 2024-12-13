@@ -1,3 +1,6 @@
+let autoAdvanceActive = false; // Zmienna śledząca stan Auto Advance
+let myInterval; // Zmienna dla setInterval
+
 window.onload = function() {
     if (localStorage.getItem('access_granted') !== 'true') {
       window.location.href = "index.html";
@@ -104,7 +107,7 @@ btn2.addEventListener('click', () => {
 
 function rangeFunction() {
     preloadImages(imagesArray);
-    var a = parseInt(document.getElementById("cards").value); // Pobieramy liczbę kart jako liczbę całkowitą
+    var a = parseInt(document.getElementById("cards").value);
     console.log(a);
 
     let opcjaEweliny = document.getElementById("submitButton4").innerText;
@@ -170,10 +173,28 @@ function checkKeyPress(key) {
 window.addEventListener("keydown", checkKeyPressRight, false);
 
 function autoPlay() {
-	var v = document.getElementById("interwał").value;
-	console.log(v);	
-	myInterval = setInterval(rangeFunction, v);
+    const button = document.getElementById("submitButton2");
+    const intervalInput = document.getElementById("interwał");
+
+    if (!autoAdvanceActive) {
+        const v = parseInt(intervalInput.value, 10);
+
+        if (isNaN(v) || v <= 0) {
+            alert("Podaj poprawną wartość w milisekundach!");
+            return;
+        }
+        myInterval = setInterval(rangeFunction, v);
+        autoAdvanceActive = true;
+        intervalInput.disabled = true;
+        button.innerText = "Pause";
+    } else {
+        clearInterval(myInterval);
+        autoAdvanceActive = false;
+        intervalInput.disabled = false;
+        button.innerText = "Start";
+    }
 }
+
 window.addEventListener("keydown", checkKeyPressP, false);
 function checkKeyPressP(key) {
 	if (key.keyCode == "80") {

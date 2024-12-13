@@ -75,9 +75,6 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
-
-
 let num;
 var x, c;
 var a = 0;
@@ -127,50 +124,23 @@ function rangeFunction2(){
 function displayFunction() {
   console.log(queue);
   console.log(queue.length);
-  
-  if(norepeat == false){
-	  c = getRandomInt(a, b);
-  }
-  else{
-	  toggleText();
-	  c = queue.pop();
-  }
-  
-  x = document.getElementById("displayNumber");
-  x.style.cssText  = "font-size:44px;color:white;"
-  x = c;
-  window.addEventListener("keydown", checkKeyPressR, false);
-  function checkKeyPressR(key) {  
-	  if (key.keyCode == "82") {
-		  numbers.add(x);
-	  }
+
+  c = norepeat ? queue.pop() : getRandomInt(a, b);
+  toggleText();
+
+  let formattedNumber = c.toString();
+  while (formattedNumber.length < b.toString().length) {
+    formattedNumber = "0" + formattedNumber;
   }
 
-  if(b <= 99 && b >= 10){
-    if(x < 100 && x >= 10){
-      document.getElementById("displayNumber").innerHTML = x;
-      }
-      else if(x < 10 && x >= 0){
-      num = "0" + x;
-      document.getElementById("displayNumber").innerHTML = num;
+  document.getElementById("displayNumber").innerHTML = formattedNumber;
+  document.getElementById("displayNumber").style.cssText = "font-size:44px;color:white;";
+
+  window.addEventListener("keydown", function (key) {
+    if (key.keyCode == "82") {
+      numbers.add(c);
     }
-  }
-  else if(b <= 9){
-    document.getElementById("displayNumber").innerHTML = x;
-  }
-  else{
-    if(x < 100 && x >= 10){
-    num = "0" + x;
-    document.getElementById("displayNumber").innerHTML = num;
-    }
-    else if(x < 10 && x >= 0){
-    num = "00" + x;
-    document.getElementById("displayNumber").innerHTML = num;
-    }
-    else{
-    document.getElementById("displayNumber").innerHTML = x;
-    }
-  }
+  }, { once: true });
 }
 
 window.addEventListener("keydown", checkKeyPress, false);
@@ -181,10 +151,31 @@ function checkKeyPress(key) {
  }
 }
 
+let isAutoPlaying = false;
+let myInterval;
+
 function autoPlay() {
-	var v = document.getElementById("interwał").value;
-	console.log(v);	
-	myInterval = setInterval(displayFunction, v);
+    const button = document.getElementById("submitButton2");
+    const intervalInput = document.getElementById("interwał");
+
+    if (!isAutoPlaying) {
+        const intervalValue = parseInt(intervalInput.value);
+
+        if (isNaN(intervalValue) || intervalValue <= 0) {
+            alert("Please enter a valid positive number for milliseconds.");
+            return;
+        }
+
+        myInterval = setInterval(displayFunction, intervalValue);
+        button.textContent = "Pause";
+        intervalInput.disabled = true;
+        isAutoPlaying = true;
+    } else {
+        clearInterval(myInterval);
+        button.textContent = "Start";
+        intervalInput.disabled = false;
+        isAutoPlaying = false;
+    }
 }
 window.addEventListener("keydown", checkKeyPressP, false);
 function checkKeyPressP(key) {

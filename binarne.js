@@ -144,9 +144,31 @@ function updateDisplayHeight(rrange) {
   }
 }
 
+let isAutoPlaying = false;
+let myInterval;
+
 function autoPlay() {
-  const interval = parseInt(document.getElementById("interwał").value) || 1000;
-  myInterval = setInterval(displayFunction, interval);
+    const button = document.getElementById("submitButton2");
+    const intervalInput = document.getElementById("interwał");
+
+    if (!isAutoPlaying) {
+        const intervalValue = parseInt(intervalInput.value);
+
+        if (isNaN(intervalValue) || intervalValue <= 0) {
+            alert("Please enter a valid positive number for milliseconds.");
+            return;
+        }
+
+        myInterval = setInterval(displayFunction, intervalValue);
+        button.textContent = "Pause";
+        intervalInput.disabled = true;
+        isAutoPlaying = true;
+    } else {
+        clearInterval(myInterval);
+        button.textContent = "Start";
+        intervalInput.disabled = false;
+        isAutoPlaying = false;
+    }
 }
 
 function showOptions2() {
