@@ -75,9 +75,11 @@ async function loadWordLists() {
 }
 
 let autoPlayInterval;
+let isAutoPlaying = false;
 
 function startAutoPlay() {
-    const interval = parseInt(document.getElementById("interval").value.trim(), 10);
+    const intervalInput = document.getElementById("interval").value.trim();
+    const interval = parseInt(intervalInput, 10);
     if (!interval || interval <= 0) {
         alert("Please enter a valid interval in milliseconds.");
         return;
@@ -86,7 +88,6 @@ function startAutoPlay() {
     autoPlayInterval = setInterval(function() {
         displayRandomWord();
     }, interval);
-    alert(`Auto advance started with interval: ${interval} ms`);
 }
 
 function stopAutoPlay() {
@@ -211,3 +212,5 @@ function checkKeyPressP(key) {
 		clearInterval(myInterval);
 	}
 }
+
+window.displayRandomWord = displayRandomWord;

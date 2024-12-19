@@ -18,17 +18,31 @@ function showOptions2() {
     x.style.visibility = x.style.visibility === "visible" ? "hidden" : "visible";
 }
 
+let isAutoPlaying = false;
+
 function startAutoPlay() {
-    const interval = parseInt(document.getElementById("interval").value.trim(), 10);
-    if (!interval || interval <= 0) {
-        alert("Please enter a valid interval in milliseconds.");
-        return;
+    const intervalInput = document.getElementById("interval");
+    const startPauseButton = document.getElementById("submitButton2");
+
+    if (!isAutoPlaying) {
+        const interval = parseInt(intervalInput.value.trim(), 10);
+        if (!interval || interval <= 0) {
+            alert("Please enter a valid interval in milliseconds.");
+            return;
+        }
+        stopAutoPlay();
+        autoPlayInterval = setInterval(function () {
+            displayRandomWord();
+        }, interval);
+        intervalInput.disabled = true;
+        startPauseButton.innerText = "Pause";
+        isAutoPlaying = true;
+    } else {
+        stopAutoPlay();
+        intervalInput.disabled = false;
+        startPauseButton.innerText = "Start";
+        isAutoPlaying = false;
     }
-    stopAutoPlay();
-    autoPlayInterval = setInterval(function() {
-        displayRandomWord();
-    }, interval);
-    alert(`Auto advance started with interval: ${interval} ms`);
 }
 
 function stopAutoPlay() {
